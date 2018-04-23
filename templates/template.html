@@ -8,8 +8,9 @@
 
 
 {% for repo in query_result %}
-    <h2>{{ repo.respository_name }}</h2>
+    <h2>{{ repo.ID }} {{ repo.respository_name }}</h2>
     <h3> Created {{ repo.created_at }}</h3>
+    <a href="{{ repo.owner_url }}"><img src="{{ repo.avatar_url }}" alt="avatar" height="42" width="42"/></a>
 
     {{ repo.owner_login }}
     <h3>LastCommit</h3>
