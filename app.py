@@ -27,16 +27,17 @@ def navigator():
 def test_query():
     search_term = request.args.get('search_term', type=str)
 
+    if search_term=="":
+        return render_template('template.html', search_term="Please insert a search_term")
+
     commitheaders = {'Accept': 'application/vnd.github.cloak-preview'}
     query_url = "https://api.github.com/search/repositories?q="+search_term+"&sort=updated_at&order=desc"
-
     q_answer = requests.get(query_url).json()
 
-    # if q_answer.ok():
-    #     pass
-    # else:
-    #     print("q_answer IS Wrong")
-    #     return
+    if len(q_answer['items']) < 1:
+        print("Not Found")
+        search_term = search_term + " not found"
+        return render_template('template.html', search_term=search_term)
     
     first5 = q_answer['items'][0:5]
     q_result = list()
@@ -48,7 +49,7 @@ def test_query():
         one_repository['respository_name'] = item['name']
         created_at = datetime.datetime.strptime(item['created_at'], "%Y-%m-%dT%H:%M:%SZ")
         one_repository['created_at'] = created_at
-        one_repository['owner_url'] = item['owner']['url']
+        one_repository['owner_url'] = item['owner']['html_url']
         one_repository['avatar_url'] = item['owner']['avatar_url']
         one_repository['owner_login'] = item['owner']['login']
 
