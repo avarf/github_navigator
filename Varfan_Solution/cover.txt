@@ -1,0 +1,10 @@
+GitHub navigator documentations
+
+This program searches GitHub repositories for the given search term and present some specific information about the repository and the last commit of the newest 5 repositories as an html page.
+
+Flask was used for developing this program and thus it is needed for running this program. Flask documentation and installation guide can be found here: "http://flask.pocoo.org/docs/0.12/installation/".
+
+For running the program please follow below steps:
+1- Start the application: "python3 application.py"
+2- Get a request: "http://localhost:5000/navigator?search_term=some_search_term"
+3- The result will be presented as an html page
